@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "20235134",
     "public": "user-management/frontend",
     "ignore": [
       "firebase.json",
