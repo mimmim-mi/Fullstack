@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3001/api/users';
+const API_URL = 'https://fullstack-backend-fz4o.onrender.com/api/users';
 
 function getErrorMessage(status, data) {
     if (data && data.error) {
