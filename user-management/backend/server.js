@@ -47,6 +47,10 @@ const User = mongoose.model('User', userSchema);
 
 const MAX_LIMIT = 100;
 
+app.get('/', (req, res) => {
+    res.json({ message: 'User management backend is running' });
+});
+
 const normalizeString = (value) => {
     if (typeof value !== 'string') {
         return value;
