@@ -10,8 +10,8 @@ app.use(express.json());
 
 mongoose
     .connect('mongodb+srv://20235134:20235134@it4409-20235134.fvz6v93.mongodb.net/IT4409-20235134')
-    .then(() => console.log('Connected to MongoDB'))
-    .catch((err) => console.error('MongoDB'));
+    .then(() => console.log('Đã kết nối MongoDB'))
+    .catch((err) => console.error('Lỗi kết nối MongoDB', err));
 
 //TODO: Tạo Schema
 const userSchema = new mongoose.Schema({
@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
         unique: true,
         trim: true,
         lowercase: true,
-        match: [/^\S+@\S+\.\S+$/, 'Email không hợp lệ']
+        match: [/^\S+@\S+\.\S+$/, 'Thư điện tử không hợp lệ']
     },
     address: {
         type: String,
@@ -48,7 +48,7 @@ const User = mongoose.model('User', userSchema);
 const MAX_LIMIT = 100;
 
 app.get('/', (req, res) => {
-    res.json({ message: 'User management backend is running' });
+    res.json({ message: 'Backend quản lý người dùng đang chạy' });
 });
 
 const normalizeString = (value) => {
@@ -94,7 +94,7 @@ const normalizeUserData = (data, onlyProvided = false) => {
     return userData;
 };
 
-//TODO: Implement API endpoints
+//TODO: Cài đặt các API
 app.get('/api/users', async (req, res) => {
     try {
         const pageNumber = parseInt(req.query.page);
@@ -139,7 +139,7 @@ app.post('/api/users', async (req, res) => {
 
         const existedUser = await User.findOne({ email: userData.email });
         if (existedUser) {
-            return res.status(400).json({ error: "Email đã tồn tại" });
+            return res.status(400).json({ error: "Thư điện tử đã tồn tại" });
         }
 
         const newUser = await User.create(userData);
@@ -150,7 +150,7 @@ app.post('/api/users', async (req, res) => {
         })
     } catch (err) {
         if (err.code === 11000) {
-            return res.status(400).json({ error: "Email đã tồn tại" });
+            return res.status(400).json({ error: "Thư điện tử đã tồn tại" });
         }
 
         res.status(400).json({ error: err.message });
@@ -172,7 +172,7 @@ app.put('/api/users/:id', async (req, res) => {
         if (userData.email) {
             const existedUser = await User.findOne({ email: userData.email, _id: { $ne: id } });
             if (existedUser) {
-                return res.status(400).json({ error: "Email đã tồn tại" });
+                return res.status(400).json({ error: "Thư điện tử đã tồn tại" });
             }
         }
 
@@ -187,7 +187,7 @@ app.put('/api/users/:id', async (req, res) => {
         });
     }catch (err) {
         if (err.code === 11000) {
-            return res.status(400).json({ error: "Email đã tồn tại" });
+            return res.status(400).json({ error: "Thư điện tử đã tồn tại" });
         }
 
         res.status(400).json({ error: err.message });
@@ -216,9 +216,9 @@ app.delete('/api/users/:id', async (req, res) => {
     }
 });
 
-// Start server
+// Khởi động máy chủ
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Máy chủ đang chạy tại cổng ${PORT}`);
 });

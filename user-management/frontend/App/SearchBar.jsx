@@ -17,7 +17,7 @@ function SearchBar({ value, onChange }) {
         <div className="search-bar">
             <input
                 type="text"
-                placeholder="Tìm theo tên, email, địa chỉ..."
+                placeholder="Tìm theo tên, thư điện tử, địa chỉ..."
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 style={{ width: '100%', padding: '10px', fontSize: '16px' }}

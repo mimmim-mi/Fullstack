@@ -60,7 +60,7 @@ function App() {
             })
             .catch((err) => {
                 setError(err.message);
-                console.error('Fetch error:', err);
+                console.error('Lỗi tải dữ liệu:', err);
             });
     };
 
@@ -98,7 +98,7 @@ function App() {
 
     return (
         <div className="container">
-            <h1>Quản lý Người dùng</h1>
+            <h1>Quản lý người dùng</h1>
 
             <SearchBar value={search} onChange={handleSearchChange} />
 
@@ -162,7 +162,7 @@ function UserTable({ users, page, limit, onEdit, onDelete }) {
                     <th>STT</th>
                     <th>Họ tên</th>
                     <th>Tuổi</th>
-                    <th>Email</th>
+                    <th>Thư điện tử</th>
                     <th>Địa chỉ</th>
                     <th>Thao tác</th>
                 </tr>
@@ -211,7 +211,7 @@ function Pagination({ page, total, totalPages, limit, onPageChange, onLimitChang
                     onClick={() => onPageChange(page - 1)}
                     disabled={page === 1}
                 >
-                    Prev
+                    Trước
                 </button>
                 <span style={{ margin: '0 15px' }}>
                     Trang {page}/{totalPages || 1} - Tổng {total}
@@ -220,7 +220,7 @@ function Pagination({ page, total, totalPages, limit, onPageChange, onLimitChang
                     onClick={() => onPageChange(page + 1)}
                     disabled={page >= totalPages}
                 >
-                    Next
+                    Sau
                 </button>
             </div>
         </div>
@@ -253,7 +253,7 @@ function UserModal({ user, onClose, onSave }) {
         }
 
         if (!email || !email.includes('@') || !email.includes('.')) {
-            newErrors.email = 'Email không hợp lệ';
+            newErrors.email = 'Thư điện tử không hợp lệ';
         }
 
         setErrors(newErrors);
@@ -312,7 +312,7 @@ function UserModal({ user, onClose, onSave }) {
                 />
                 {errors.age && <p className="error">{errors.age}</p>}
 
-                <label>Email *</label>
+                <label>Thư điện tử *</label>
                 <input
                     name="email"
                     type="email"
