@@ -213,7 +213,8 @@ app.delete('/api/users/:id', async (req, res) => {
 });
 
 // Start server
-app.listen(3001, () => {
-    console.log('Server running on port 3001');
-});
+const PORT = process.env.PORT || 3001;
 
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
